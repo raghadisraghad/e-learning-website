@@ -1,0 +1,94 @@
+{% extends 'dashboard/learner/base.html' %}
+
+{% load static %}
+{% block body %}
+
+<style>
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #122622;
+    /* Dark green background color */
+    color: #ffffff;
+    /* White text color */
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  img {
+    border-radius: 15px;
+  }
+
+  .tutorial-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-left: 20px;
+    /* Add margin for spacing between image and text */
+  }
+
+  .card {
+    background-color: #1e392f;
+    /* Dark green card background color */
+    color: #ffffff;
+    /* White text color */
+    margin-bottom: 20px;
+  }
+
+  .card-footer {
+    background-color: #122622;
+    /* Dark green footer background color */
+    color: #ffffff;
+    /* White text color */
+  }
+
+  .upload-btn {
+    margin-top: 10px;
+  }
+</style>
+
+<div class="container">
+  <!-- Image -->
+  <div>
+    {% if object.thumb %}
+    <img src="{{ object.thumb.url }}" alt="{{ object.title }}" style="width: 300px; height: 300px;">
+    {% else %}
+    <p>No image available</p>
+    {% endif %}
+  </div>
+
+  <!-- Tutorial Information -->
+  <div class="tutorial-info">
+    <a href="{% url 'ltutorial' %}">
+      <button type="submit" class="btn btn-primary">Back</button>
+    </a>
+
+    <h1 class="my-4">
+      <small></small>
+    </h1>
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title"></h2>
+        <p class="card-text"><span style="color: green; font-weight: bold; letter-spacing: 10px; padding-left: 30px">
+            |{{ object.title}}</span></p>
+        <p class="card-text">course : {{ object.course}}</p>
+        <p class="card-text">content : {{ object.content|linebreaks }}</p>
+      </div>
+      <div class="card-footer text-muted">
+        Posted on {{ object.created_at }} by
+        <a href="#">{{ object.user.username }}</a>
+      </div>
+    </div>
+
+    <!-- Video Upload Button -->
+    {% if object.video %}
+    <a href="{{ object.video.url }}" class="btn btn-primary" download>Download Video</a>
+    {% else %}
+    <p>No video available for download</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'dashboard/learner/base.html' %}
+
+{% load static %}
+
+{% block body %}
+<div id="content-wrapper">
+
+    <div class="container-fluid">
+
+        <i class="fas fa-user-circle fa-fw text-primary"></i>
+        <span>Logged As {{ user.username }}</span>
+    </div>
+</div>
+
+{% endblock %}

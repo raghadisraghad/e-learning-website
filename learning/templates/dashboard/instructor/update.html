@@ -1,0 +1,42 @@
+{% extends 'dashboard/instructor/base.html' %}
+{% load static %}
+
+
+{% block body %}
+
+<div class="container" style="padding-top: 20px;max-width: 600px;">
+    <!-- Breadcrumbs-->
+    <div class="card mb-3" style="background-color: #454d55; color: white;">
+        <div class="card-header text-success">
+            <i class="fas fa-table"></i>
+            Please Browse And Update Notes
+        </div>
+        <div class="card-body">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="myFile" style="color: white;">Report</label>
+                            <input type="file" id="myFile" name="file" class="form-control"
+                                placeholder="Report Attachment" enctype="multipart/form-data" style="color: white;">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-lg btn-block" style="background-color: #999965;">Add
+                        Now</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

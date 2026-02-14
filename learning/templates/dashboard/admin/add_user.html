@@ -1,0 +1,38 @@
+{% extends 'dashboard/admin/base.html' %}
+
+{% load static %}
+
+{% block body %}
+<div id="content-wrapper" class="d-flex justify-content-center align-items-center"
+    style="min-height: 100vh; background-color: #f8f9fa;">
+    <div class="container">
+        <!-- Promotion to Admin Section -->
+        <div class="card mb-3" style="max-width: 600px; margin: auto;">
+            <div class="card-header bg-warning text-white">
+                <i class="fas fa-user-shield"></i>
+                Promote Existing User to Admin
+            </div>
+            <div class="card-body">
+                <form class="form-horizontal" action="{% url 'makeadmin' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="userSelect">Select User:</label>
+                        <select class="form-control" id="userSelect" name="user_id" required>
+                            <option value="" disabled selected>Select User</option>
+                            {% for user in users %}
+                            {% if not user.is_admin %}
+                            <option value="{{ user.id }}">{{ user.username }}</option>
+                            {% endif %}
+                            {% endfor %}
+
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-warning btn-block">Promote to Admin</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

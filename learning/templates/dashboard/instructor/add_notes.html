@@ -1,0 +1,68 @@
+{% extends 'dashboard/instructor/base.html' %}
+{% load static %}
+
+
+{% block body %}
+<div class="container d-flex justify-content-center" style="max-width: 900px; padding-top: 30px;">
+    <div class="row w-100">
+        <div class="col-12">
+            <div class="card mb-3" style="background-color: #2e3b2f; color: white;">
+                <div class="card-header" style="background-color: darkgreen;">
+                    <i class="fas fa-table text-primary"></i>
+                    Fill In Information of Notes
+                </div>
+                <div class="card-body">
+                    {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                    <form action="{% url 'publish_notes' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="col"><input type="text" class="form-control" name="title"
+                                    placeholder="Notes Title" required="required"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col">
+                                <select class="form-control" name="course_id" required="">
+                                    <option value="">Choose Course</option>
+                                    {% if courses %}
+                                    {% for course in courses %}
+                                    <option value="{{ course.id }}">{{ course.name }}</option>
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col"><label>Choose Notes Cover</label>
+                                <input type="file" id="myFile" name="cover" class="form-control"
+                                    placeholder="Report Attachment" enctype="multipart/form-data">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col"><label>Choose PDF Notes</label>
+                                <input type="file" id="myFile" name="file" class="form-control"
+                                    placeholder="Report Attachment" enctype="multipart/form-data">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block"
+                                style="background-color: darkgreen;">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,454 @@
+@import url('../variables.css');
+
+/* ===== Admin Add Learner Page ===== */
+.admin-add-learner {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    padding: 2rem 1rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ===== Breadcrumb ===== */
+.admin-add-learner .breadcrumb {
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.admin-add-learner .breadcrumb-item a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.admin-add-learner .breadcrumb-item a:hover {
+    color: #6366f1;
+    text-decoration: underline;
+}
+
+.admin-add-learner .breadcrumb-item.active {
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+.admin-add-learner .breadcrumb-item + .breadcrumb-item::before {
+    color: var(--gray-400);
+    content: "›";
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+/* ===== Main Card ===== */
+.add-learner-card {
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    animation: slideUp 0.5s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== Card Header ===== */
+.add-learner-card .card-header {
+    background: linear-gradient(135deg, var(--primary) 0%, #0d6526 100%);
+    border-bottom: none;
+    padding: 1.5rem 2rem;
+}
+
+.add-learner-card .card-header .d-flex {
+    gap: 1rem;
+}
+
+.add-learner-card .card-header .header-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.add-learner-card .card-header .header-title h4 {
+    color: white;
+    font-weight: 600;
+    font-size: 1.4rem;
+}
+
+.add-learner-card .card-header .header-title p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* ===== Card Body ===== */
+.add-learner-card .card-body {
+    padding: 2rem;
+    background: white;
+}
+
+/* ===== Form Header ===== */
+.form-header h5 {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.form-header h5 i {
+    color: var(--primary);
+}
+
+.form-header hr {
+    border-color: var(--gray-200);
+    opacity: 0.5;
+}
+
+/* ===== Form Sections ===== */
+.form-section {
+    background: var(--gray-50);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--gray-200);
+    transition: all 0.3s ease;
+}
+
+.form-section:hover {
+    border-color: var(--primary);
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.05);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-700);
+    font-size: 1rem;
+}
+
+.section-number {
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ===== Form Fields ===== */
+.form-group {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: var(--gray-700);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.form-group .form-control {
+    border: 1px solid var(--gray-300);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    height: auto;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-group .form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+    outline: none;
+}
+
+.form-group .form-control.is-invalid {
+    border-color: var(--danger);
+    background-image: none;
+}
+
+.form-group .invalid-feedback {
+    color: var(--danger);
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* ===== Password Field ===== */
+.password-field {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 38px;
+    background: none;
+    border: none;
+    color: var(--gray-500);
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.password-toggle:hover {
+    color: var(--primary);
+}
+
+.password-hint {
+    background: rgba(79, 70, 229, 0.05);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary);
+}
+
+.password-hint small {
+    color: var(--gray-600);
+    font-size: 0.8rem;
+}
+
+/* ===== Crispy Forms Overrides ===== */
+.learner-form .asteriskField {
+    color: var(--danger);
+    margin-left: 0.25rem;
+}
+
+.learner-form .alert {
+    border-radius: 8px;
+    border: none;
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+}
+
+/* ===== Form Actions ===== */
+.form-actions {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--gray-200);
+}
+
+.form-actions .btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.form-actions .btn-success {
+    background: linear-gradient(135deg, var(--secondary), #16a34a);
+    border: none;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+.form-actions .btn-success:hover {
+    background: linear-gradient(135deg, #16a34a, var(--secondary));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+}
+
+.form-actions .btn-outline-secondary {
+    border: 2px solid var(--gray-300);
+    color: var(--gray-700);
+    background: white;
+}
+
+.form-actions .btn-outline-secondary:hover {
+    background: var(--gray-100);
+    border-color: var(--gray-400);
+    transform: translateY(-2px);
+}
+
+/* ===== Card Footer ===== */
+.add-learner-card .card-footer {
+    background: var(--gray-50);
+    border-top: 1px solid var(--gray-200);
+    padding: 1rem 2rem;
+}
+
+.add-learner-card .card-footer small {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.add-learner-card .card-footer small i {
+    color: var(--primary);
+}
+
+/* ===== Alerts ===== */
+.alert {
+    border-radius: 12px;
+    border: none;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+    border-left: 4px solid var(--secondary);
+    color: #166534;
+}
+
+.alert-error, .alert-danger {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+    border-left: 4px solid var(--danger);
+    color: #991b1b;
+}
+
+.alert-warning {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(245, 158, 11, 0.05));
+    border-left: 4px solid #f59e0b;
+    color: #92400e;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+    border-left: 4px solid #3b82f6;
+    color: #1e40af;
+}
+
+.alert .btn-close {
+    filter: none;
+    opacity: 0.5;
+}
+
+.alert .btn-close:hover {
+    opacity: 1;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+    .admin-add-learner {
+        padding: 1rem;
+    }
+    
+    .add-learner-card .card-header {
+        padding: 1.25rem;
+    }
+    
+    .add-learner-card .card-body {
+        padding: 1.5rem;
+    }
+    
+    .form-section {
+        padding: 1rem;
+    }
+    
+    .section-title {
+        margin-bottom: 1rem;
+    }
+    
+    .form-actions .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .breadcrumb {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .add-learner-card .card-header .d-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .add-learner-card .card-header .header-icon {
+        margin: 0 auto;
+    }
+    
+    .form-actions .row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .password-toggle {
+        top: 35px;
+    }
+}
+
+/* ===== Loading State ===== */
+.btn-success:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.btn-success:disabled:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+}
+
+/* ===== Tooltips ===== */
+[data-bs-toggle="tooltip"] {
+    cursor: help;
+}
+
+/* ===== Focus Styles ===== */
+.form-control:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* ===== Print Styles ===== */
+@media print {
+    .admin-add-learner {
+        background: white;
+        padding: 0;
+    }
+    
+    .breadcrumb,
+    .form-actions,
+    .card-footer {
+        display: none;
+    }
+    
+    .add-learner-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+}

@@ -1,0 +1,109 @@
+{% extends 'dashboard/learner/base.html' %}
+{% load static %}
+
+{% block body %}
+<div class="container-fluid d-flex justify-content-center" style="max-width: 900px;">
+  <div class="row w-100">
+    <div class="col-12 mb-3">
+      <div class="col-12 mb-3">
+        <div id="content-wrapper" class="w-100" style="padding-top: 30px">
+          <div class="container-fluid">
+            <div class="card mb-3" style="background-color: #2e3b2f; color: white;">
+              <div class="card-body">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                  {{ message }}
+                </div>
+                {% endfor %}
+                <div class="table-responsive">
+                  <!-- Table --->
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="color: white;">
+                    <thead>
+                      <tr style="background-color: darkgreen;">
+                        <th>ID</th>
+                        <th>Cover</th>
+                        <th>Title</th>
+                        <th>Read</th>
+                        <th>Download</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% if notes %}
+                      {% for note in notes %}
+                      <tr>
+                        <td>{{ note.id }}</td>
+                        <td>
+                          {% if note.cover %}
+                          <img src="{{ note.cover.url }}" alt="{{ note.title }}" style="width:100px; height: 100px">
+                          {% else %}
+                          <span class="text-muted" style="color: lightgrey;">No cover</span>
+                          {% endif %}
+                        </td>
+                        <td>{{ note.title }}</td>
+                        <td>
+                          {% if note.file %}
+                          <a href="{{ note.file.url }}" class="btn btn-outline-primary" target="_blank"
+                            style="color: white; border-color: darkgreen; background-color: darkgreen;">
+                            View PDF</a>
+                          {% else %}
+                          <span class="text-muted" style="color: lightgrey;">No PDF</span>
+                          {% endif %}
+                        </td>
+                        <td>
+                          {% if note.file %}
+                          <a href="{{ note.file.url }}" download class="btn btn-outline-success"
+                            style="color: white; border-color: darkgreen; background-color: darkgreen;">
+                            Download PDF</a>
+                          {% else %}
+                          <span class="text-muted" style="color: lightgrey;">No PDF</span>
+                          {% endif %}
+                        </td>
+                      </tr>
+                      <!-- end for and if -->
+                      {% endfor %}
+                      {% endif %}
+                    </tbody>
+                  </table>
+                  {% if is_paginated %}
+                  <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link"
+                        href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+                    {% else %}
+                    <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                    {% endif %}
+                    {% for i in paginator.page_range %}
+                    {% if page_obj.number == i %}
+                    <li class="page-item active"><span class="page-link">{{ i }} <span
+                          class="sr-only">(current)</span></span></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                    {% endif %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="{% static 'js/jquery-2.1.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.dataTables.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</body>
+
+</html>
+{% endblock %}

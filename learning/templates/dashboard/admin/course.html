@@ -1,0 +1,128 @@
+{% extends 'dashboard/admin/base.html' %}
+
+{% load static %}
+
+{% block body %}
+<div id="content-wrapper" class="d-flex justify-content-center align-items-center"
+  style="min-height: 100vh; background-color: #f8f9fa;">
+  <div class="container">
+    <!-- Breadcrumbs-->
+    <div class="card mb-3" style="max-width: 600px; margin: auto;">
+      <div class="card-header" style="background-color: #0f5132; color: white;">
+        <i class="fas fa-table"></i>
+        Register New Course
+      </div>
+      <div class="card-body">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+          {{ message }}
+        </div>
+        {% endfor %}
+        <form method="post" action="{% url 'course' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <div class="form-label-group">
+                  <input type="text" class="form-control" id="course-title" name="name" placeholder="Enter course title"
+                    required>
+                  <label for="course-title">Course Title</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col">
+                <div class="form-label-group">
+                  <input type="color" class="form-control" id="course-color" name="color" value="#007bff" required>
+                  <label for="course-color">Course Color Code</label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col text-center">
+                <button type="submit" class="btn btn-lg"
+                  style="background-color: #0f5132; color: white;">Submit</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Courses Table -->
+    <div class="card mb-3 mt-4" style="max-width: 800px; margin: auto;">
+      <div class="card-header" style="background-color: #0f5132; color: white;">
+        <i class="fas fa-table"></i>
+        List of Courses
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Course Title</th>
+                <th>Color Code</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for course in courses %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ course.name }}</td>
+                <td><span
+                    style="background-color: {{ course.color }}; padding: 5px 10px; border-radius: 3px; color: white;">
+                    {{course.color }}</span></td>
+                <td>
+                  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                    data-target="#deleteModal{{ course.id }}">Delete</button>
+                </td>
+              </tr>
+              <!-- Delete Modal -->
+              <div class="modal fade" id="deleteModal{{ course.id }}" tabindex="-1" role="dialog"
+                aria-labelledby="deleteModalLabel{{ course.id }}" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header" style="background-color: #dc3545; color: white;">
+                      <h5 class="modal-title" id="deleteModalLabel{{ course.id }}">Ready to Delete?</h5>
+                      <button class="close text-white" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="text-danger">Select "Delete" below if you want to delete the course titled "
+                        {{course.name }}".</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                      <a class="btn btn-danger" href="{% url 'deletecourse' course.id %}">Delete</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extrascripts %}
+<script type="text/javascript">
+  $(function ()
+  {
+    // Hide message
+    $(".alert").fadeTo(2000, 500).slideUp(500, function ()
+    {
+      $(".alert").slideUp(500);
+    });
+  });
+</script>
+{% endblock %}
